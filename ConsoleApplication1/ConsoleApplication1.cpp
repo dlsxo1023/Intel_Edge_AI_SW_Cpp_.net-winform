@@ -9,7 +9,7 @@ int main()
     printf("안녕하세요. C++ 의 세계에 오신것을 환영합니다!\n\n");
     
     printf("2의 제곱 : %d\n", SQUARE(2));
-
+    printf("5의 제곱 : %d\n", SQUARE(5));
     int x = -2;
     printf("%d의 절대값 : %d\n",x , ABS(x));
     printf("4의 절대값 : %d\n", ABS(-4));
