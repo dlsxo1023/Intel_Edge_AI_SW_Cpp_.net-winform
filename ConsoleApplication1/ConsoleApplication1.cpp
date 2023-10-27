@@ -12,7 +12,7 @@ int main()
     printf("5의 제곱 : %d\n", SQUARE(5));
     int x = -2;
     printf("%d의 절대값 : %d\n",x , ABS(x));
-    printf("4의 절대값 : %d\n", ABS(-4));
+    printf("-4의 절대값 : %d\n", ABS(-4));
 
     
 
