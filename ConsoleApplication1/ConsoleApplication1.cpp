@@ -12,6 +12,7 @@ int main()
 
     int x = -2;
     printf("%d의 절대값 : %d\n",x , ABS(x));
+    printf("%4의 절대값 : %d\n", ABS(-4));
 
     
 
