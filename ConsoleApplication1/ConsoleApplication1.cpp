@@ -13,27 +13,27 @@
 }point2D;
 double Dist(point2D p1, point2D p2);*/
 
-class point 
+class point   //class 선언
 {
 public:
     int x;
     int y;
     //point() {}    // null argument 허용
-    point(int x1 = 0, int y1 = 0) // derault 값 설정 하여  null argument도 사용 가능하게 만듬
-    {
+    point(int x1 = 0, int y1 = 0) // 생성자에 derault 값 설정 하여  null argument도 사용 가능하게 만듬
+    {                             //   오버로딩도 가능 함 
         x = x1; y = y1;
     }
-    double Dist(point p);
-    double area(point p);
+    double Dist(point p);  //맴버 함수
+    double area(point p);  //맴버 함수 
 };
-double point::Dist(point p)
+double point::Dist(point p) //맴버 함수 두 점간의 거리
 {
     int w = (x - p.x);
     int h = (y - p.y);
     double d = sqrt(w * w + h * h);
     return d;
 }
-double point::area(point p)
+double point::area(point p) // 맴버 함수 두 점으로 만든 사각형의 넓이
 {
     int w = ABS(x - p.x);
     int h = ABS(y - p.y);
