@@ -18,7 +18,8 @@ class point
 public:
     int x;
     int y;
-    point(int x1, int y1)
+    //point() {}    // null argument 허용
+    point(int x1 = 0, int y1 = 0) // derault 값 설정 하여  null argument도 사용 가능하게 만듬
     {
         x = x1; y = y1;
     }
@@ -56,7 +57,7 @@ int main()
     printf("%d의 절대값 : %d\n",x , ABS(x));
     printf("-4의 절대값 : %d\n", ABS(-4));
 
-    point p1(10, 10), p2(20, 30);
+    point p1(10, 10), p2(20, 30), p3;
    /* p1.x = 10; p1.y = 10;
     p2.x = 20; p2.y = 30;*/
 
@@ -64,8 +65,11 @@ int main()
     printf("두 점 p1(%d, %d) p2(%d, %d) 점의 거리는 : %.2f 입니다.\n", p1.x, p1.y, p2.x, p2.y, d);
 
     double a = p1.area(p2);
-    printf("두 점 p1(%d, %d) p2(%d, %d) 면적은 : %.2f 입니다.",p1.x, p1.y, p2.x, p2.y, a);
+    printf("두 점 p1(%d, %d) p2(%d, %d) 면적은 : %.2f 입니다.\n",p1.x, p1.y, p2.x, p2.y, a);
+
+    printf("null argument p3는 p(%d, %d)로 설정되었습니다.",p3.x, p3.y);
 }
+   
 
 //double Dist(point2D p1, point2D p2) //두 점간의 거리
 //{
