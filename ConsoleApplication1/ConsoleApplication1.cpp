@@ -2,11 +2,11 @@
 //
 
 #include <iostream>
-#define SQUARE(x) ((x)*(x))
-#define ABS(x)  (x < 0) ? -(x) : (x)
+#define SQUARE(x) ((x)*(x)) // 매크로 함수 // 제곱
+#define ABS(x)  (x < 0) ? -(x) : (x) // 매크로 함수 // 삼항 연산자 // 절대값
 int main()
 {
-    printf("안녕하세요. C++ 의 세계에 오신것을 환영합니다!\n\n");
+    printf("안녕하세요. C++ 의 세계에 오신것을 환영합니다!\n\n"); 
     
     printf("2의 제곱 : %d\n", SQUARE(2));
     printf("5의 제곱 : %d\n", SQUARE(5));
@@ -17,7 +17,7 @@ int main()
     
 
 
-    //std::cout << "안녕하세요. C++ 의 세계에 오신것을 환영합니다."\n";
+    
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
