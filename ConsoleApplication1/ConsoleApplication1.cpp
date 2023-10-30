@@ -10,15 +10,42 @@
 {
     int x;
     int y;
-}point2D;*/
+}point2D;
+double Dist(point2D p1, point2D p2);*/
 
-typedef struct Point 
+class point 
 {
+public:
     int x;
     int y;
-}point2D;
-
-double Dist(point2D p1, point2D p2);
+    point(int x1, int y1)
+    {
+        x = x1; y = y1;
+    }
+    double Dist(point p);
+    double area(point p);
+};
+double point::Dist(point p)
+{
+    int w = (x - p.x);
+    int h = (y - p.y);
+    double d = sqrt(w * w + h * h);
+    return d;
+}
+double point::area(point p)
+{
+    int w = ABS(x - p.x);
+    int h = ABS(y - p.y);
+    double a = w * h;
+    return a;
+}
+//double point::Dist(point p)
+//{
+//    int w = (x - p.x);
+//    int h = (y - p.y);
+//    double d = sqrt(w * w + h * h);   //sqrt = 루트 
+//    return d;
+//}
 int main()
 {
     printf("안녕하세요. C++ 의 세계에 오신것을 환영합니다!\n\n"); 
@@ -29,24 +56,27 @@ int main()
     printf("%d의 절대값 : %d\n",x , ABS(x));
     printf("-4의 절대값 : %d\n", ABS(-4));
 
-    point2D p1, p2;  // 구조체 두 점 선언
-    p1.x = 10; p1.y = 10;
-    p2.x = 20; p2.y = 30;
+    point p1(10, 10), p2(20, 30);
+   /* p1.x = 10; p1.y = 10;
+    p2.x = 20; p2.y = 30;*/
 
-    double d = Dist(p1, p2);
-    printf("두 점 p1(%d, %d), p2(%d, %d)의 거리는 : %.2f 입니다", p1.x, p1.y, p2.x, p2.y, d);
+    double d = p1.Dist(p2);
+    printf("두 점 p1(%d, %d) p2(%d, %d) 점의 거리는 : %.2f 입니다.\n", p1.x, p1.y, p2.x, p2.y, d);
 
+    double a = p1.area(p2);
+    printf("두 점 p1(%d, %d) p2(%d, %d) 면적은 : %.2f 입니다.",p1.x, p1.y, p2.x, p2.y, a);
 }
 
-double Dist(point2D p1, point2D p2) //두 점간의 거리
-{
-    int w = ABS(p1.x - p2.x);
-    int h = ABS(p1.y - p2.y);
-    int w1 = w * w;
-    int h1 = h * h;
-    double d = sqrt(w1 + h1);   //sqrt = 루트 
-    return d;
-}
+//double Dist(point2D p1, point2D p2) //두 점간의 거리
+//{
+//    int w = ABS(p1.x - p2.x);
+//    int h = ABS(p1.y - p2.y);
+//    int w1 = w * w;
+//    int h1 = h * h;
+//    double d = sqrt(w1 + h1);   //sqrt = 루트 
+//    return d;
+//}
+
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
 // 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
 
