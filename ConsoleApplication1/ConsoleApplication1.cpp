@@ -24,12 +24,28 @@ public:
         x = x1; y = y1;
     }
     double Dist(point p);  //맴버 함수
+    double Dist(int x1, int y1); // 함수의 오버로딩
+    double Dist(point p1, point p2);
     double area(point p);  //맴버 함수 
 };
 double point::Dist(point p) //맴버 함수 두 점간의 거리
 {
     int w = (x - p.x);
     int h = (y - p.y);
+    double d = sqrt(w * w + h * h);
+    return d;
+}
+double point::Dist(int x1, int y1) //맴버 함수 두 점간의 거리
+{
+    int w = (x - x1);
+    int h = (y - y1);
+    double d = sqrt(w * w + h * h);
+    return d;
+}
+double point::Dist(point p1, point p2)
+{
+    int w = (p1.x - p2.x);
+    int h = (p1.y - p2.y);
     double d = sqrt(w * w + h * h);
     return d;
 }
@@ -62,8 +78,10 @@ int main()
     p2.x = 20; p2.y = 30;*/
 
     double d = p1.Dist(p2);
-    printf("두 점 p1(%d, %d) p2(%d, %d) 점의 거리는 : %.2f 입니다.\n", p1.x, p1.y, p2.x, p2.y, d);
-
+    double e = p1.Dist(20, 30);
+    double q = p2.Dist(p1, p2);
+    printf("두 점 p1(%d, %d) p2(%d, %d) 점의 거리는 : %.2f(%.2f)(%.2f) 입니다.\n", p1.x, p1.y, p2.x, p2.y, d, e, q);
+   
     double a = p1.area(p2);
     printf("두 점 p1(%d, %d) p2(%d, %d) 면적은 : %.2f 입니다.\n",p1.x, p1.y, p2.x, p2.y, a);
 
