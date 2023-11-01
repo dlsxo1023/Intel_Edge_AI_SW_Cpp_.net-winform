@@ -15,19 +15,57 @@ double Dist(point2D p1, point2D p2);*/
 
 class point   //class 선언
 {
-public:
-    int x;
-    int y;
-    //point() {}    // null argument 허용
-    point(int x1 = 0, int y1 = 0) // 생성자에 derault 값 설정 하여  null argument도 사용 가능하게 만듬
-    {                             //   오버로딩도 가능 함 
-        x = x1; y = y1;
-    }
-    double Dist(point p);  //맴버 함수
-    double Dist(int x1, int y1); // 함수의 오버로딩
-    double Dist(point p1, point p2);
-    double area(point p);  //맴버 함수 
+    public:
+        int x;
+        int y;
+        //point() {}    // null argument 허용
+        point(int x1 = 0, int y1 = 0) // 생성자에 derault 값 설정 하여  null argument도 사용 가능하게 만듬
+        {                             //   오버로딩도 가능 함 
+            x = x1; y = y1;
+        }
+        double Dist(point p);  //맴버 함수 // 함수의 프로토 타입 // 함수 선언
+        double Dist(int x1, int y1); // 함수의 오버로딩
+        double Dist(point p1, point p2);
+        double area(point p);  //맴버 함수 
 };
+
+int main()
+{
+    printf("안녕하세요. C++ 의 세계에 오신것을 환영합니다!\n\n"); 
+    
+    printf("2의 제곱 : %d\n", SQUARE(2));
+    printf("5의 제곱 : %d\n", SQUARE(5));
+    int x = -2;
+    printf("%d의 절대값 : %d\n",x , ABS(x));
+    printf("-4의 절대값 : %d\n", ABS(-4));
+
+    point p1(10, 10), p2(20, 30), p3;
+   /* p1.x = 10; p1.y = 10;
+    p2.x = 20; p2.y = 30;*/
+
+    double d = p1.Dist(p2);
+    double e = p1.Dist(20, 30);
+    double d1 = p1.Dist(p2);
+    double e1 = p3.Dist(p1, p2);
+    printf("두 점 p1(%d, %d) p2(%d, %d) 점의 거리는 : %.2f(%.2f) 입니다.\n", p1.x, p1.y, p2.x, p2.y, d, e);
+    printf("두 점 p1(%d, %d) p2(%d, %d) 점의 거리는 : %.2f(%.2f) 입니다.\n", p1.x, p1.y, p2.x, p2.y, d1, e1);
+    double a = p1.area(p2);
+    printf("두 점 p1(%d, %d) p2(%d, %d) 면적은 : %.2f 입니다.\n",p1.x, p1.y, p2.x, p2.y, a);
+
+    printf("null argument p3는 p(%d, %d)로 설정되었습니다.",p3.x, p3.y);
+}
+   
+
+//double Dist(point2D p1, point2D p2) //두 점간의 거리
+//{
+//    int w = ABS(p1.x - p2.x);
+//    int h = ABS(p1.y - p2.y);
+//    int w1 = w * w;
+//    int h1 = h * h;
+//    double d = sqrt(w1 + h1);   //sqrt = 루트 
+//    return d;
+//}
+
 double point::Dist(point p) //맴버 함수 두 점간의 거리
 {
     int w = (x - p.x);
@@ -56,48 +94,7 @@ double point::area(point p) // 맴버 함수 두 점으로 만든 사각형의 �
     double a = w * h;
     return a;
 }
-//double point::Dist(point p)
-//{
-//    int w = (x - p.x);
-//    int h = (y - p.y);
-//    double d = sqrt(w * w + h * h);   //sqrt = 루트 
-//    return d;
-//}
-int main()
-{
-    printf("안녕하세요. C++ 의 세계에 오신것을 환영합니다!\n\n"); 
-    
-    printf("2의 제곱 : %d\n", SQUARE(2));
-    printf("5의 제곱 : %d\n", SQUARE(5));
-    int x = -2;
-    printf("%d의 절대값 : %d\n",x , ABS(x));
-    printf("-4의 절대값 : %d\n", ABS(-4));
 
-    point p1(10, 10), p2(20, 30), p3;
-   /* p1.x = 10; p1.y = 10;
-    p2.x = 20; p2.y = 30;*/
-
-    double d = p1.Dist(p2);
-    double e = p1.Dist(20, 30);
-    double q = p2.Dist(p1, p2);
-    printf("두 점 p1(%d, %d) p2(%d, %d) 점의 거리는 : %.2f(%.2f)(%.2f) 입니다.\n", p1.x, p1.y, p2.x, p2.y, d, e, q);
-   
-    double a = p1.area(p2);
-    printf("두 점 p1(%d, %d) p2(%d, %d) 면적은 : %.2f 입니다.\n",p1.x, p1.y, p2.x, p2.y, a);
-
-    printf("null argument p3는 p(%d, %d)로 설정되었습니다.",p3.x, p3.y);
-}
-   
-
-//double Dist(point2D p1, point2D p2) //두 점간의 거리
-//{
-//    int w = ABS(p1.x - p2.x);
-//    int h = ABS(p1.y - p2.y);
-//    int w1 = w * w;
-//    int h1 = h * h;
-//    double d = sqrt(w1 + h1);   //sqrt = 루트 
-//    return d;
-//}
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
 // 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
