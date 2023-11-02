@@ -2,75 +2,9 @@
 //
 
 #include <iostream>
+#include "point.h"
 #define MIN(x, y)  (((x) > (y)) ? (y) : (x))
 #define MAX(x, y)  (((x) < (y)) ? (y) : (x))
-
-class point
-{
-private:     //접근지시자 ( 외부 참조 불가)
-      
-public:  //접근지시자  (외부 참조 가능)
-    int x, y;  //맴버 변수 선언. //객체의 좌표
-    point(int x = 0, int y = 0) : x(x), y(y)  // 이니셜라이져
-        //생성자 정의 //아무런 타입이 없는 함수//외부접근이 필요하기에 public 접근지시자 전에 미리 사용
-        //함수적 특성을 가지고 있음(default, overload 등)
-    {
-        //x = x1; y = y1; 
-    }
-    double Dist(point p)   // 맴버 함수 // 두 점간의 거리 계산.  // 리턴값은 Double 타입으로 return
-    {
-        int w = x - p.x;
-        int h = y - p.y;
-        return sqrt(w * w + h * h);   //sqrt 명령어 자체가 double 타입임 // 따로 타입을 기입안해도 됨
-    }
-    double Dist(point p1, point p2)   // 맴버 함수 // 두 점(자신을 제외한) 거리 계산.  // 리턴값은 Double 타입으로 return
-    {
-        int w = p1.x - p2.x;
-        int h = p1.y - p2.y;
-        return sqrt(w * w + h * h);   //sqrt 명령어 자체가 double 타입임 // 따로 타입을 기입안해도 됨
-    }
-};
-
-class Rect
-{
-
-    point p11, p22;  // 클래스 맴버 변수 선언
-    //point LL, LR, UL, UR;
-public:
-    Rect(point p1, point p2) : p11(p1), p22(p2)    // 이니셜라이져
-    {
-       /* int xl = MIN(p1.x, p2.x);
-        int xr = MAX(p1.x, p2.x); 
-        int yl = MIN(p1.y, p2.y);
-        int yu = MAX(p1.y, p2.y);
-        LL = point(xl, yl);
-        LR = point(xr, yl);
-        UL = point(xl, yu);
-        UR = point(xr, yu);*/
-        
-    }
-    point GetLL();
-    point GetLR();
-    point GetUL();
-    point GetUR();
-};
-
-point Rect::GetLL()
-{
-    return point(MIN(p11.x, p22.x), MIN(p11.y, p22.y));
-}
-point Rect::GetLR()
-{
-    return point(MAX(p11.x, p22.x), MIN(p11.y, p22.y));
-}
-point Rect::GetUL()
-{
-    return  point(MIN(p11.x, p22.x), MAX(p11.y, p22.y));
-}
-point Rect::GetUR()
-{
-    return  point(MAX(p11.x, p22.x), MAX(p11.y, p22.y));
-}
 
 void printp(point p)
 {
@@ -93,7 +27,7 @@ void swap_p(int *a, int *b)   // Call-by-pointer
     printf("[swap]결과값 a = %d  b = %d\n", *a, *b);
 }
 
-void swap_r(int &a, int &b)   // Call-by-Reference (using ref. variables) // 함수 매개변수 속 레퍼런스 변수 호출시 메인함수 변수로 초기화
+void swap_r(int &a, int &b)   // Call-by-Reference (using ref. variables) 
 {
     int t(a);
     printf("[swap_r]초기값 a = %d  b = %d\n", a, b);
@@ -103,6 +37,18 @@ void swap_r(int &a, int &b)   // Call-by-Reference (using ref. variables) // 함
 
 int main()
 {
+    point arr[3];  //객체 배열  : 3개의 point 클래스 객체가 default 초기화 됨. 
+    arr[0].SetP(10, 10); printp(arr[0]);
+    arr[1].SetP(20, 30); printp(arr[1]);
+    arr[2].SetP(40, 60); printp(arr[2]);
+    printf("Class point 객체 크기 : %d\n", sizeof(arr)); // 객체의 크기는 맴버 변수의 크기에 결정 // 객체 배열의 크기는 X[n]
+
+    point* parr[3]; // point 객체 포인터(*) 배열 : 객체화 되어 있지 않음
+    printf("point 객체 포인터 배열 크기 : %d\n", sizeof(parr));
+    parr[0] = new point(10, 10); printp(*parr[0]);
+    parr[1] = new point(20, 30); printp(*parr[1]);
+    parr[2] = new point(40, 50); printp(*parr[2]);
+
     //point p1, p2(10, 10), p3(20, 30), p4;
     //p4 = p3;
     //double d = p1.Dist(p2);
@@ -123,14 +69,16 @@ int main()
     //printp(r.GetUL());
     //printp(r.GetUR());
 
-    int a(10), b(20);  //a = 10; b = 20;
-    printf("초기값 a = %d  b = %d\n", a, b);
-    swap_r(a, b);
-    printf("결과값 a = %d  b = %d\n", a, b); // 이니셜라이져로 변수 초기화 하고 그 밑에 변수 값 바꿀시 고전적으로 대입
+    //Reference 변수 테스트
+    //int a(10), b(20);  //a = 10; b = 20;
+    //printf("초기값 a = %d  b = %d\n", a, b);
+    //swap_r(a, b);
+    //printf("결과값 a = %d  b = %d\n", a, b); // 이니셜라이져로 변수 초기화 하고 그 밑에 변수 값 바꿀시 고전적으로 대입
 
-    //int n = 1234;
-    //int& m = n;
+    //int n = 1234, n1 = 1000;
+    //int& m = n;  //레퍼런스 변수 선언과 동시에 초기화 과정 필수
     //printf("[레퍼런스 변수 테스트] n = %d, m = %d\n", n, m);
+    //
     //m = 5678;
     //printf("[레퍼런스 변수 테스트] n = %d, m = %d\n", n, m);
 }
