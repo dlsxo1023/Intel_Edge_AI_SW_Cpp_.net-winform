@@ -11,7 +11,7 @@ private:     //접근지시자 ( 외부 참조 불가)
       
 public:  //접근지시자  (외부 참조 가능)
     int x, y;  //맴버 변수 선언. //객체의 좌표
-    point(int x1 = 0, int y1 = 0) : x(x1), y(y1)  // 이니셜라이져
+    point(int x = 0, int y = 0) : x(x), y(y)  // 이니셜라이져
         //생성자 정의 //아무런 타입이 없는 함수//외부접근이 필요하기에 public 접근지시자 전에 미리 사용
         //함수적 특성을 가지고 있음(default, overload 등)
     {
@@ -76,26 +76,63 @@ void printp(point p)
 {
     printf("point(%d, %d)\n",p.x, p.y);
 }
+
+void swap_v(int a, int b)   // Call-by-value
+{
+    int t(a);
+    printf("[swap]초기값 a = %d  b = %d\n", a, b);
+    a = b; b = t;
+    printf("[swap]결과값 a = %d  b = %d\n", a, b);
+}
+
+void swap_p(int *a, int *b)   // Call-by-pointer
+{
+    int t(*a);
+    printf("[swap]초기값 a = %d  b = %d\n", *a, *b);
+    *a = *b; *b = t;
+    printf("[swap]결과값 a = %d  b = %d\n", *a, *b);
+}
+
+void swap_r(int &a, int &b)   // Call-by-Reference (using ref. variables) // 함수 매개변수 속 레퍼런스 변수 호출시 메인함수 변수로 초기화
+{
+    int t(a);
+    printf("[swap_r]초기값 a = %d  b = %d\n", a, b);
+    a = b; b = t;
+    printf("[swap_r]결과값 a = %d  b = %d\n", a, b);
+}
+
 int main()
 {
-    point p1, p2(10, 10), p3(20, 30), p4;
-    p4 = p3;
-    double d = p1.Dist(p2);
-    double d1 = p2.Dist(p3);
-    double d2 = p1.Dist(p2, p3);
-    printp(p1); printp(p2); printp(p3); printp(p4);
-    printf("점간의 거리 계산 : \nd(p1, p2) = %.2f d1(p2, p3) = %.2f d2(p2, p3) = %.2f\n", d, d1, d2);
-    printf("Hello World!\n");
+    //point p1, p2(10, 10), p3(20, 30), p4;
+    //p4 = p3;
+    //double d = p1.Dist(p2);
+    //double d1 = p2.Dist(p3);
+    //double d2 = p1.Dist(p2, p3);
+    //printp(p1); printp(p2); printp(p3); printp(p4);
+    //printf("점간의 거리 계산 : \nd(p1, p2) = %.2f d1(p2, p3) = %.2f d2(p2, p3) = %.2f\n", d, d1, d2);
+    //printf("Hello World!\n");
+    
+    
+    //Rect r(p2, p3);
+    //printf("두 점 \n");
+    //printp(p2);
+    //printp(p3);
+    //printf("에 의해 정의된 사각형의 꼭지점의 좌표는\n");
+    //printp(r.GetLL());
+    //printp(r.GetLR());
+    //printp(r.GetUL());
+    //printp(r.GetUR());
 
-    Rect r(p2, p3);
-    printf("두 점 \n");
-    printp(p2);
-    printp(p3);
-    printf("에 의해 정의된 사각형의 꼭지점의 좌표는\n");
-    printp(r.GetLL());
-    printp(r.GetLR());
-    printp(r.GetUL());
-    printp(r.GetUR());
+    int a(10), b(20);  //a = 10; b = 20;
+    printf("초기값 a = %d  b = %d\n", a, b);
+    swap_r(a, b);
+    printf("결과값 a = %d  b = %d\n", a, b); // 이니셜라이져로 변수 초기화 하고 그 밑에 변수 값 바꿀시 고전적으로 대입
+
+    //int n = 1234;
+    //int& m = n;
+    //printf("[레퍼런스 변수 테스트] n = %d, m = %d\n", n, m);
+    //m = 5678;
+    //printf("[레퍼런스 변수 테스트] n = %d, m = %d\n", n, m);
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
