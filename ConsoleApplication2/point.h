@@ -68,4 +68,5 @@ point Rect::GetUL()
 point Rect::GetUR()
 {
     return  point(MAX(p11.x, p22.x), MAX(p11.y, p22.y));
+
 }
