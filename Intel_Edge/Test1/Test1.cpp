@@ -9,6 +9,7 @@ int main()
 	p2.SetP(Point(20, 30)).viewP("p2");
 	p3.SetP(40, 70).viewP("p3");
 	printf("두 점으로 정의되는 사각형의 넓이는 : %.2f 입니다\n", p2 * p3);
+
 	//printf("Point Move Test.....\n");
 	//p1.MoveP(1, 1).viewP("P1_1_1");
 	//p1.MoveP(1, 1).viewP("P1_1_1"); 
