@@ -18,7 +18,7 @@ int main()
 	//printf("Point print Test..p1(%d, %d).\n\n", p1.X(), p1.Y());   
 	//p1.X() = 10; p1.Y() = 10;
 	//printf("Point Ref.Access print Test..."); p1.viewP("p1");
-
+	
 	Point p6 = p1 + p2;
 	double p7 = p1 * p2;
 	double p8 = p5 * p5;
