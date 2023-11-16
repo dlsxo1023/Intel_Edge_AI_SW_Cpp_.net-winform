@@ -17,7 +17,7 @@ void Rect::Show(const char* s)  // Rect(p1(x1, y1), p2(x2, y2))
 {
 	printf("%s(", s);
 	p1.ShowEX("p1");
-	p2.SHowEX("p2");
+	p2.ShowEX("p2");
 	printf(")\n");
 }
 Point& Point::operator+(Point p)  // 두 점 Cur p와 p의 + 연산결과를 (새로운 point로) 반환

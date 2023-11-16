@@ -24,11 +24,11 @@ private:
 public:
 	Point p1, p2;
 	
-	Rect(Point pp1 , Point pp2) : p1(PP1), p2(pp2) {}
+	Rect(Point pp1 , Point pp2) : p1(pp1), p2(pp2) {}
 	Rect(int x1 = 0, int y1 = 0, int x2 = 0, int y2 = 0) // 함수의 오버로드
 	{
 		p1 = Point(x1, y1);
-		P2 = Point(x2, y2);
+		p2 = Point(x2, y2);
 	}  
 	void Show(const char* s);  // Rect(p1(x1, y1), p2(x2, y2))
 };

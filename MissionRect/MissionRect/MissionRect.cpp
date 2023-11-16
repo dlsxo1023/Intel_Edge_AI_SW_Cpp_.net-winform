@@ -6,7 +6,7 @@ int main()
     Rect r2(10, 20, 30, 40);
     Rect r3(Point(100, 200), Point(300, 400));
     r1.Show("R1");
-    r1.Show("R2");
-    r1.Show("R3");
+    r2.Show("R2");
+    r3.Show("R3");
 }
 
