@@ -12,6 +12,8 @@ public:
 
 	double Dist(Point p);  // Distance
 	void Show(const char* s = NULL); // View Current Point , s : Point name
+	void ShowEX(const char* s = NULL); // View Current Point , no Linefeed
+	
 	Point& operator+(Point p);
 };
 
@@ -28,4 +30,5 @@ public:
 		p1 = Point(x1, y1);
 		P2 = Point(x2, y2);
 	}  
+	void Show(const char* s);  // Rect(p1(x1, y1), p2(x2, y2))
 };
