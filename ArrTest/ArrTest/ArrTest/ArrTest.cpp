@@ -27,6 +27,7 @@ public:
 		//return *(arr + idx);
 		return arr[idx];
 	}
+	void Show();
 	ArrTest& append(int size);
 	ArrTest& append(ArrTest& brr);
 };
@@ -49,23 +50,52 @@ ArrTest& ArrTest::append(ArrTest& brr) // size : total
 	Len += brr.length();
 	return *this;
 }
+void ArrTest::Show()
+{
+	int i;
+	printf("{");
+	for (i = 0; i < Len - 1; i++) printf(" %d, ", arr[i]); printf(" %d ", arr[i]);
+	printf("}\n");
+}
+
+class Func
+{
+private:
+
+public:
+	int operator()(int a, int b)  // 함수의 오버로딩 가능 ex) 같은 방식으로 다른 타입 또는 다른 연산도 가능
+	{
+		return a * b;
+	}
+	double operator()(double a, double b)
+	{
+		return a * b;
+	}
+	ArrTest& operator()(ArrTest& b1, ArrTest& b2)
+	{
+		return  b1.append(b2);
+	}
+};
+
 int main()
 {
 	int a1[] = { 11, 22, 33, 44, 55 };
-	ArrTest arr(7);
-	
+	ArrTest arr(5);
 	for (int i = 0; i < 5; i++)            arr[i] = a1[i];
-	for (int i = 0; i < arr.length(); i++) printf("ArrTest[%d] = %d\n",i, arr[i]);
-	
+	//for (int i = 0; i < arr.length(); i++) printf("ArrTest[%d] = %d\n",i, arr[i]);
+	//
 	int a2[] = { 21, 22, 23, 24, 25 };
-	ArrTest brr(7);
+	ArrTest brr(5);
 	for (int i = 0; i < 5; i++)    brr[i] = a2[i];
-	
-	int n = arr.length();
-	printf("배열 확장 %d --> %d\n",n , arr.append(brr).length());
-	
-	for (int i = 0; i < arr.length(); i++) printf("ArrTest[%d] = %d\n", i, arr[i]);
+	//
+	//int n = arr.length();
+	//printf("배열 확장 %d --> %d\n",n , arr.append(brr).length());
+	//
+	//for (int i = 0; i < arr.length(); i++) printf("ArrTest[%d] = %d\n", i, arr[i]);
 
-
+	Func mul;
+	std::cout << mul(2, 3)<<"\n";
+	std::cout << mul(2.3, 3.6)<<"\n";
+	mul(arr, brr).Show();
 }
 
