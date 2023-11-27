@@ -1,12 +1,18 @@
 ﻿#include <iostream>
-template <class T>
+
+template <typename T>
 void Swap(T &a, T &b)
 {
     T c = a;
     a = b; 
     b = c;
 }
-
+template <typename T>
+T ABS(T a)
+{
+    if (a < 0) return -a;
+    return a;
+}
 int main()
 {
     int a = 10, b = 20;
