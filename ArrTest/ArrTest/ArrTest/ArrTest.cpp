@@ -28,7 +28,7 @@ public:
 		return arr[idx];
 	}
 	ArrTest& append(int size);
-	ArrTest& append(ArrTest brr);
+	ArrTest& append(ArrTest& brr);
 };
 ArrTest& ArrTest::append(int size)  // size : total ? 추가로 배열을 추가하는 함수 
 {
@@ -39,11 +39,11 @@ ArrTest& ArrTest::append(int size)  // size : total ? 추가로 배열을 추가
 	Len += size;
 	return *this;
 }
-ArrTest& ArrTest::append(ArrTest brr) // size : total
+ArrTest& ArrTest::append(ArrTest& brr) // size : total
 {
 	int* arr1 = new int[Len + brr.length()];
 	memcpy(arr1, arr, Len * sizeof(int));
-	memcpy(arr1 + Len * sizeof(int), brr.arr, brr.length() * sizeof(int));
+	memcpy(arr1 + Len, brr.arr, brr.length() * sizeof(int));
 	delete arr;
 	arr = arr1;
 	Len += brr.length();
@@ -59,7 +59,7 @@ int main()
 	
 	int a2[] = { 21, 22, 23, 24, 25 };
 	ArrTest brr(7);
-	for (int i = 5; i < 10; i++)    brr[i] = a2[i - 5];
+	for (int i = 0; i < 5; i++)    brr[i] = a2[i];
 	
 	int n = arr.length();
 	printf("배열 확장 %d --> %d\n",n , arr.append(brr).length());
