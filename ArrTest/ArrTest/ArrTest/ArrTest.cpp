@@ -164,6 +164,9 @@ int main()
 	std::cout << mul(arr, brr) << "\n"; //mul(arr, brr).Show();
 	std::cout << (arr += brr) << "\n";
 	std::cout << crr << "\n";
-}
 
+	string s = "안녕하세요";
+	cout << s << "\n"; 
+	cout << s.substr(2, 4) << "\n";
+}
 
