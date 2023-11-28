@@ -66,6 +66,28 @@ public:
 		printf(" }");
 		return os;
 	}
+	ArrTest<T>& operator+(ArrTest<T>& br)  // calling sequence : crr = arr + brr
+	{
+		int l =Len + br.length();
+		ArrTest<T> *cr = new ArrTest<T>(l);
+		//T* arr1 = new T[ar.length() + br.length()];
+		memcpy(cr->arr, arr, Len * sizeof(T));
+		memcpy(cr->arr + Len, br.arr, br.length() * sizeof(T));
+		return *cr;
+	}
+	ArrTest<T>& operator+=(ArrTest<T>& br) // calling sequence : arr += brr
+	{
+		return this->append(br);
+	}
+	bool operator==(ArrTest<T>& br) // calling sequence : if(arr == brr)
+	{
+		if (Len != br.length()) return false;
+		for (int i = 0; i < Len; i++)
+		{
+			if (arr[i] != br[i]) return false;
+		}
+		return true;
+	}
 };
 //ArrTest& ArrTest::append(int size)  // size : total ? 추가로 배열을 추가하는 함수 
 //{
@@ -127,16 +149,21 @@ int main()
 	double a2[] = { 21.1, 22.1, 23.1, 24.1, 25.1 };
 	ArrTest<double> brr(5);
 	for (int i = 0; i < 5; i++)    brr[i] = a2[i];
+	
 	//
 	//int n = arr.length();
 	//printf("배열 확장 %d --> %d\n",n , arr.append(brr).length());
 	//
 	//for (int i = 0; i < arr.length(); i++) printf("ArrTest[%d] = %d\n", i, arr[i]);
+	if (arr == brr) printf("Same sequence....\n");
+	ArrTest<double> crr = arr + brr;
 
 	Func mul;
 	std::cout << mul(2, 3)<<"\n";
 	std::cout << mul(2.3, 3.6)<<"\n";
-	std::cout << mul(arr, brr) << "\n";
-	//mul(arr, brr).Show();
+	std::cout << mul(arr, brr) << "\n"; //mul(arr, brr).Show();
+	std::cout << (arr += brr) << "\n";
+	std::cout << crr << "\n";
 }
+
 
