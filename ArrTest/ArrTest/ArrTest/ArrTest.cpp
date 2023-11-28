@@ -1,5 +1,7 @@
 ﻿#include <iostream>
 
+using namespace std;
+
 template <typename T>
 class ArrTest
 {
@@ -54,6 +56,15 @@ public:
 		arr = arr1;
 		Len += brr.length();
 		return *this;
+	}
+	friend std::ostream& operator<<(std::ostream& os, ArrTest& ar)
+	{
+		int i;
+		printf("{ ");
+		for (i = 0; i < ar.Len - 1; i++)
+			std::cout << ar.arr[i] << ", ";  std::cout << ar.arr[i];
+		printf(" }");
+		return os;
 	}
 };
 //ArrTest& ArrTest::append(int size)  // size : total ? 추가로 배열을 추가하는 함수 
@@ -125,6 +136,7 @@ int main()
 	Func mul;
 	std::cout << mul(2, 3)<<"\n";
 	std::cout << mul(2.3, 3.6)<<"\n";
-	mul(arr, brr).Show();
+	std::cout << mul(arr, brr) << "\n";
+	//mul(arr, brr).Show();
 }
 
