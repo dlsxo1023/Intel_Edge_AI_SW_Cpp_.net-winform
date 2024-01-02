@@ -1,13 +1,15 @@
 ﻿#include <iostream>
 #include "Point.h"
+#include "Point.cpp"
+
 int main()
 {
-	Point p1(10, 10), p2, p3;
-	p1.viewP("p1"); p2.viewP(); p3.viewP();
-	Point p4 = p3, p5(p2);
+	Point<double> p1(10.1, 10.1), p2(20.1, 20.1), p3(30.1, 30.1);
+	p1.viewP("p1"); p2.viewP("p2"); p3.viewP("p3");
+	Point<double> p4 = p3, p5(p2);
 	
-	p2.SetP(Point(20, 30)).viewP("p2");
-	p3.SetP(40, 70).viewP("p3");
+	p3.SetP(40.1, 70.1).viewP("p3");
+	p2.SetP(p3).viewP("p2");
 	printf("두 점으로 정의되는 사각형의 넓이는 : %.2f 입니다\n", p2 * p3);
 
 	//printf("Point Move Test.....\n");
@@ -18,7 +20,7 @@ int main()
 	//printf("Point print Test..p1(%d, %d).\n\n", p1.X(), p1.Y());   
 	//p1.X() = 10; p1.Y() = 10;
 	//printf("Point Ref.Access print Test..."); p1.viewP("p1");
-	Point p6 = p1 + p2;
+	Point<double> p6 = p1 + p2;
 	double p7 = p1 * p2;
 	double p8 = p5 * p5;
 	printf("Point [Operator+] Test..."); p6.viewP("_p6");
