@@ -45,3 +45,7 @@
 /WinApp/WinTest01
 /WinApp/MFCTest01/x64/Debug/MFCTest01.tlog
 /WinApp/MFCTest01/x64/Debug
+/WinApp/mfcMemo/x64/Debug
+/WinApp/mfcMemo/mfcMemo.vcxproj
+/WinApp/mfcMemo/mfcMemo.vcxproj.filters
+/WinApp/mfcMemo/mfcMemo.vcxproj.user
