@@ -12,7 +12,9 @@
 #define new DEBUG_NEW
 #endif
 
-
+#include <cstring>
+#include <iostream>
+#include <fstream>
 // 응용 프로그램 정보에 사용되는 CAboutDlg 대화 상자입니다.
 
 class CAboutDlg : public CDialogEx
@@ -43,6 +45,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
+	
 END_MESSAGE_MAP()
 
 
@@ -67,6 +70,7 @@ BEGIN_MESSAGE_MAP(CmfcMemoDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_EN_CHANGE(IDC_EDIT1, &CmfcMemoDlg::OnEnChangeEdit1)
 	ON_COMMAND(ID_MENU_OPEN, &CmfcMemoDlg::OnMenuOpen)
+	ON_COMMAND(ID_MENU_ABOUT, &CmfcMemoDlg::OnMenuAbout)
 END_MESSAGE_MAP()
 
 
@@ -173,25 +177,42 @@ void CmfcMemoDlg::OnMenuOpen()  // File Open Menu 처리기
 	char buf[512];
 	CString str;
 
-	wchar_t wbuf[100];  //ofn 의 filename 저장공간
+	wchar_t fName[100];  //ofn 의 filename 저장공간
 	OPENFILENAME ofn;
 	ZeroMemory(&ofn, sizeof(ofn)); // 메모리 공간 청소 
-	ZeroMemory(&wbuf, sizeof(wbuf));
+	ZeroMemory(fName, sizeof(fName));
 	
 	ofn.lStructSize = sizeof(OPENFILENAME);   // OPENFILENAME 구조체 사이즈 
-	ofn.lpstrFile = wbuf;  
+	ofn.lpstrFile = fName;  
 	ofn.nMaxFile = 100;
 	ofn.lpstrDefExt = L"";
 
-	if (!GetOpenFileName(&ofn)) return;
+	if (!GetOpenFileName(&ofn)) return;   // OPENFILENAME 구조체 호출
 
-	str = wbuf;  // CString <== WCHAR , CString <== char 가능
+	str = fName;  // CString <== WCHAR , CString <== char 가능
 	
+	// C 언어의 표준함수 .ANSI encoding
+	//FILE* fp = fopen(fName, "rb");  
+	//while (fgets(buf, 512, fp))  
+	//{
+	//	((CEdit*)GetDlgItem(IDC_EDIT1))->GetWindowText(str);
+	//	GetDlgItem(IDC_EDIT1)->SetWindowText(str + buf);
+	//}
 
-	FILE* fp = fopen(CStringA(str), "rb");  // C 언어의 표준함수
-	while (fgets(buf, 512, fp))  
+	//C++ stream 표준 .UTF-8 encoding
+	wchar_t buf1[512];
+	std::locale::global(std::locale(".UTF-8"));
+	std::wifstream ff(fName);
+	for (; ff.getline(buf1, 512);)
 	{
-		((CEdit*)(GetDlgItem(IDC_EDIT1)))->GetWindowTextW(str);
-		GetDlgItem(IDC_EDIT1)->SetWindowTextW(str + buf);
+		((CEdit*)GetDlgItem(IDC_EDIT1))->GetWindowText(str);
+		str += buf1; str += "\r\n";
+		GetDlgItem(IDC_EDIT1)->SetWindowText(str);
 	}
+}
+
+void CmfcMemoDlg::OnMenuAbout()
+{
+	CAboutDlg dlg;
+	dlg.DoModal();
 }
