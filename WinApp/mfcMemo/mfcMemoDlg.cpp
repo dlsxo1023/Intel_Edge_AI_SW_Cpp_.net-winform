@@ -7,6 +7,7 @@
 #include "mfcMemo.h"
 #include "mfcMemoDlg.h"
 #include "afxdialogex.h"
+#include "CmfcFindDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -62,15 +63,19 @@ CmfcMemoDlg::CmfcMemoDlg(CWnd* pParent /*=nullptr*/)
 void CmfcMemoDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_EDIT_MEMO, mEditMemo);
 }
 
 BEGIN_MESSAGE_MAP(CmfcMemoDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_EN_CHANGE(IDC_EDIT1, &CmfcMemoDlg::OnEnChangeEdit1)
 	ON_COMMAND(ID_MENU_OPEN, &CmfcMemoDlg::OnMenuOpen)
 	ON_COMMAND(ID_MENU_ABOUT, &CmfcMemoDlg::OnMenuAbout)
+	ON_COMMAND(ID_MENU_FIND, &CmfcMemoDlg::OnMenuFind)
+	ON_COMMAND(ID_MENU_FINDNEXT, &CmfcMemoDlg::OnMenuFindnext)
+	ON_COMMAND(ID_MENU_UTF8, &CmfcMemoDlg::OnMenuUtf8)
+	ON_COMMAND(ID_MENU_ANSI, &CmfcMemoDlg::OnMenuAnsi)
 END_MESSAGE_MAP()
 
 
@@ -107,6 +112,8 @@ BOOL CmfcMemoDlg::OnInitDialog()
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
 
+	mAccel = LoadAccelerators(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_ACCEL1));
+	
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -159,25 +166,12 @@ HCURSOR CmfcMemoDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-
-
-void CmfcMemoDlg::OnEnChangeEdit1()
-{
-	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
-	// CDialogEx::OnInitDialog() 함수를 재지정 
-	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
-	// 이 알림 메시지를 보내지 않습니다.
-
-	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
-}
-
-
 void CmfcMemoDlg::OnMenuOpen()  // File Open Menu 처리기
 {	
 	char buf[512];
 	CString str;
 
-	wchar_t fName[100];  //ofn 의 filename 저장공간
+	char fName[100];  //ofn 의 filename 저장공간
 	OPENFILENAME ofn;
 	ZeroMemory(&ofn, sizeof(ofn)); // 메모리 공간 청소 
 	ZeroMemory(fName, sizeof(fName));
@@ -185,30 +179,44 @@ void CmfcMemoDlg::OnMenuOpen()  // File Open Menu 처리기
 	ofn.lStructSize = sizeof(OPENFILENAME);   // OPENFILENAME 구조체 사이즈 
 	ofn.lpstrFile = fName;  
 	ofn.nMaxFile = 100;
-	ofn.lpstrDefExt = L"";
+	ofn.lpstrDefExt = "";
 
 	if (!GetOpenFileName(&ofn)) return;   // OPENFILENAME 구조체 호출
 
-	str = fName;  // CString <== WCHAR , CString <== char 가능
+	str = buf;  // CString <== WCHAR , CString <== char 가능
 	
-	// C 언어의 표준함수 .ANSI encoding
-	//FILE* fp = fopen(fName, "rb");  
-	//while (fgets(buf, 512, fp))  
-	//{
-	//	((CEdit*)GetDlgItem(IDC_EDIT1))->GetWindowText(str);
-	//	GetDlgItem(IDC_EDIT1)->SetWindowText(str + buf);
-	//}
-
-	//C++ stream 표준 .UTF-8 encoding
-	wchar_t buf1[512];
-	std::locale::global(std::locale(".UTF-8"));
-	std::wifstream ff(fName);
-	for (; ff.getline(buf1, 512);)
+	if (mEncoding == 0) // C 언어의 표준함수 .ANSI encoding.
 	{
-		((CEdit*)GetDlgItem(IDC_EDIT1))->GetWindowText(str);
-		str += buf1; str += "\r\n";
-		GetDlgItem(IDC_EDIT1)->SetWindowText(str);
+		FILE* fp = fopen(fName, "rb");
+		while (fgets(buf, 512, fp))
+		{
+			((CEdit*)GetDlgItem(IDC_EDIT1))->GetWindowText(str);
+			GetDlgItem(IDC_EDIT1)->SetWindowText(str + buf);
+		}
 	}
+	else if (mEncoding == 1) //C++ stream 표준 .UTF-8 encoding
+	{
+		wchar_t buf1[512];
+		std::locale::global(std::locale(".UTF-8"));
+		std::wifstream ff(fName);
+		for (; ff.getline(buf1, 512);)
+		{
+			str = buf1;
+			AddText(str); AddText("\r\n");
+			//((CEdit*)GetDlgItem(IDC_EDIT1))->GetWindowText(str);
+			//str += buf1; str += "\r\n";
+			//GetDlgItem(IDC_EDIT1)->SetWindowText(str);
+		}
+	}
+}
+
+void CmfcMemoDlg::AddText(CString s)
+{
+	CString str;
+
+	((CEdit*)GetDlgItem(IDC_EDIT1))->GetWindowText(str);
+	str += s; 
+	GetDlgItem(IDC_EDIT1)->SetWindowText(str);
 }
 
 void CmfcMemoDlg::OnMenuAbout()
@@ -216,3 +224,58 @@ void CmfcMemoDlg::OnMenuAbout()
 	CAboutDlg dlg;
 	dlg.DoModal();
 }
+
+void CmfcMemoDlg::OnMenuFind()
+{
+	CmfcFindDlg dlg;
+	if (dlg.DoModal() == IDOK)  // FIND 할 문자열 입력
+	{
+		CString s;
+		mEditMemo.GetWindowText(s);
+		NextFind = dlg.mStr;
+		int start = s.Find(dlg.mStr);
+		int end = start + dlg.mStr.GetLength();
+		mEditMemo.SetSel(start, end);
+		//AddText(dlg.mStr);
+		pos = start + 1;  //최초위치 바로 다음 위치 설정
+	}
+}
+
+void CmfcMemoDlg::OnMenuFindnext()
+{
+	CString s;
+	mEditMemo.GetWindowText(s);
+	int start = s.Find(NextFind, pos);
+	int end = start + NextFind.GetLength();
+	mEditMemo.SetSel(start, end);
+	pos = start + 1;  
+}
+
+
+BOOL CmfcMemoDlg::PreTranslateMessage(MSG* pMsg)
+{
+	if (mAccel)
+	{
+		if (TranslateAccelerator(m_hWnd, mAccel, pMsg)) return TRUE;
+	}
+	return CDialogEx::PreTranslateMessage(pMsg);
+}
+
+void CmfcMemoDlg::OnMenuUtf8()
+{
+	CMenu* m = GetMenu();
+	m->CheckMenuItem(ID_MENU_UTF8, MF_CHECKED);
+	m->CheckMenuItem(ID_MENU_ANSI, MF_UNCHECKED);
+	mEncoding = 1;
+}
+
+void CmfcMemoDlg::OnMenuAnsi()
+{
+	CMenu* m = GetMenu();
+	m->CheckMenuItem(ID_MENU_UTF8, MF_UNCHECKED);
+	m->CheckMenuItem(ID_MENU_ANSI, MF_CHECKED);
+	mEncoding = 0;
+}
+
+
+
