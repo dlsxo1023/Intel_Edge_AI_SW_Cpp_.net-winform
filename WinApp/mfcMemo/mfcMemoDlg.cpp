@@ -8,6 +8,7 @@
 #include "mfcMemoDlg.h"
 #include "afxdialogex.h"
 #include "CmfcFindDlg.h"
+#include "CmfcReplace.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -49,10 +50,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 	
 END_MESSAGE_MAP()
 
-
 // CmfcMemoDlg 대화 상자
-
-
 
 CmfcMemoDlg::CmfcMemoDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_MFCMEMO_DIALOG, pParent)
@@ -76,6 +74,11 @@ BEGIN_MESSAGE_MAP(CmfcMemoDlg, CDialogEx)
 	ON_COMMAND(ID_MENU_FINDNEXT, &CmfcMemoDlg::OnMenuFindnext)
 	ON_COMMAND(ID_MENU_UTF8, &CmfcMemoDlg::OnMenuUtf8)
 	ON_COMMAND(ID_MENU_ANSI, &CmfcMemoDlg::OnMenuAnsi)
+	ON_COMMAND(ID_MENU_REPLACE, &CmfcMemoDlg::OnMenuReplace)
+	ON_WM_SIZE()
+	ON_COMMAND(ID_MENU_FONT, &CmfcMemoDlg::OnMenuFont)
+
+	ON_WM_MOUSEWHEEL()
 END_MESSAGE_MAP()
 
 
@@ -111,9 +114,21 @@ BOOL CmfcMemoDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
-
-	mAccel = LoadAccelerators(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_ACCEL1));
+	fntSize = 100;
+	fntName = "Arial";
 	
+	mAccel = LoadAccelerators(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_ACCEL1));
+	mStatusBar.Create(WS_CHILD | WS_VISIBLE, CRect(0, 0, 0, 0), this, 0);   // CRect  : 좌상, 우하
+	//RepositionBars(AFX_IDW_CONTROLBAR_FIRST, AFX_IDW_CONTROLBAR_LAST, 2);
+	//GetDynamicLayout()->AddItem(mStatusBar.GetSafeHwnd(), 
+	//	CMFCDynamicLayout::MoveVertical(100), 
+	//	CMFCDynamicLayout::SizeHorizontal(100));
+	int sec[] = {100, 200};
+	mStatusBar.SetParts(2, sec);
+	//mStatusBar.SetText(" Test1", 0, SBT_NOBORDERS);
+	//mStatusBar.SetText(" Test2", 1, SBT_NOBORDERS);
+
+	OnMenuAnsi();
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -251,6 +266,19 @@ void CmfcMemoDlg::OnMenuFindnext()
 	pos = start + 1;  
 }
 
+void CmfcMemoDlg::OnMenuReplace()
+{
+	CmfcReplace dlg;
+	if (dlg.DoModal() == IDOK)  // FIND & REPLACE 할 문자열 입력
+	{
+		CString s;
+		mEditMemo.GetWindowText(s);
+		NextFind = dlg.mStrFind;
+		sReplace = dlg.mStrReplace;
+		s.Replace(NextFind, sReplace);
+		mEditMemo.SetWindowText(s);
+	}
+}
 
 BOOL CmfcMemoDlg::PreTranslateMessage(MSG* pMsg)
 {
@@ -266,6 +294,7 @@ void CmfcMemoDlg::OnMenuUtf8()
 	CMenu* m = GetMenu();
 	m->CheckMenuItem(ID_MENU_UTF8, MF_CHECKED);
 	m->CheckMenuItem(ID_MENU_ANSI, MF_UNCHECKED);
+	mStatusBar.SetText(" UTF-8", 0, SBT_NOBORDERS);
 	mEncoding = 1;
 }
 
@@ -274,8 +303,46 @@ void CmfcMemoDlg::OnMenuAnsi()
 	CMenu* m = GetMenu();
 	m->CheckMenuItem(ID_MENU_UTF8, MF_UNCHECKED);
 	m->CheckMenuItem(ID_MENU_ANSI, MF_CHECKED);
+	mStatusBar.SetText(" ANSI", 0, SBT_NOBORDERS);
 	mEncoding = 0;
 }
 
+void CmfcMemoDlg::OnSize(UINT nType, int cx, int cy)
+{
+	CDialogEx::OnSize(nType, cx, cy);  // cx : 클라이언트 영역 사이즈 
+	int nSBHeight = 30;
+	if (mStatusBar)
+	{
+		mStatusBar.MoveWindow(0, cy - nSBHeight, cx, nSBHeight);
+	}
+}
 
+void CmfcMemoDlg::OnMenuFont()
+{
+	CFontDialog dlg;
+	dlg.DoModal();
+	
+	fntSize = dlg.GetSize();
+	fntName = dlg.GetFaceName();
+	
+	CFont font;
+	font.CreatePointFont(fntSize, fntName);
+	GetDlgItem(IDC_EDIT_MEMO)->SetFont(&font);
+	font.Detach();
+}
 
+BOOL CmfcMemoDlg::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+{
+	if (nFlags == MK_CONTROL)
+	{
+		if (zDelta > 0)   fntSize += 5;
+		else              fntSize -= 5;
+		if (fntSize < 20) fntSize = 20;
+
+		CFont font;
+		font.CreatePointFont(fntSize, fntName);
+		GetDlgItem(IDC_EDIT_MEMO)->SetFont(&font);
+		font.Detach();
+	}
+	return CDialogEx::OnMouseWheel(nFlags, zDelta, pt);
+}

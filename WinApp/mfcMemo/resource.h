@@ -10,11 +10,15 @@
 #define IDR_MENU1                       130
 #define IDD_FIND_DIALOG                 132
 #define IDR_ACCEL1                      134
+#define IDD_REPLACE_DIALOG              137
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_MEMO                   1000
+#define IDC_EDIT_REPLACE1               1001
 #define IDC_EDIT3                       1002
 #define IDC_EDIT_FIND                   1002
 #define IDC_COMBO1                      1003
+#define IDC_BUTTON_END                  1007
+#define IDC_EDIT_FIND1                  1008
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -38,14 +42,18 @@
 #define ID_32794                        32794
 #define ID_MENU_UTF8                    32795
 #define ID_MENU_ANSI                    32796
+#define ID_ACCELERATOR32798             32798
+#define ID_32799                        32799
+#define ID_32800                        32800
+#define ID_MENU_FONT                    32801
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        137
-#define _APS_NEXT_COMMAND_VALUE         32797
-#define _APS_NEXT_CONTROL_VALUE         1006
+#define _APS_NEXT_RESOURCE_VALUE        139
+#define _APS_NEXT_COMMAND_VALUE         32803
+#define _APS_NEXT_CONTROL_VALUE         1009
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
