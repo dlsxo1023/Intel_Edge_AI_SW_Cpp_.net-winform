@@ -36,24 +36,24 @@
             this.sbLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnOpen = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.파일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.편집ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.보기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFont = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAnsi = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUtf8 = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuReplace = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.sbBase.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -64,9 +64,13 @@
             this.tbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbMemo.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbMemo.ForeColor = System.Drawing.SystemColors.MenuText;
             this.tbMemo.Location = new System.Drawing.Point(12, 51);
             this.tbMemo.Multiline = true;
             this.tbMemo.Name = "tbMemo";
+            this.tbMemo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbMemo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbMemo.Size = new System.Drawing.Size(508, 311);
             this.tbMemo.TabIndex = 0;
             // 
@@ -118,17 +122,12 @@
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(186, 170);
             this.btnOpen.TabIndex = 2;
-            this.btnOpen.Text = "열기";
             this.btnOpen.UseVisualStyleBackColor = false;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // openFileDialog2
-            // 
-            this.openFileDialog2.FileName = "openFileDialog2";
             // 
             // menuStrip1
             // 
@@ -163,6 +162,37 @@
             this.파일ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.파일ToolStripMenuItem.Text = "파일";
             // 
+            // mnuNew
+            // 
+            this.mnuNew.Name = "mnuNew";
+            this.mnuNew.Size = new System.Drawing.Size(103, 22);
+            this.mnuNew.Text = "New";
+            // 
+            // mnuOpen
+            // 
+            this.mnuOpen.Name = "mnuOpen";
+            this.mnuOpen.Size = new System.Drawing.Size(103, 22);
+            this.mnuOpen.Text = "Open";
+            this.mnuOpen.Click += new System.EventHandler(this.mnuOpen_Click);
+            // 
+            // mnuSave
+            // 
+            this.mnuSave.Name = "mnuSave";
+            this.mnuSave.Size = new System.Drawing.Size(103, 22);
+            this.mnuSave.Text = "Save";
+            this.mnuSave.Click += new System.EventHandler(this.mnuSave_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 6);
+            // 
+            // mnuExit
+            // 
+            this.mnuExit.Name = "mnuExit";
+            this.mnuExit.Size = new System.Drawing.Size(103, 22);
+            this.mnuExit.Text = "Exit";
+            // 
             // 편집ToolStripMenuItem
             // 
             this.편집ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -171,6 +201,18 @@
             this.편집ToolStripMenuItem.Name = "편집ToolStripMenuItem";
             this.편집ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.편집ToolStripMenuItem.Text = "편집";
+            // 
+            // mnuFind
+            // 
+            this.mnuFind.Name = "mnuFind";
+            this.mnuFind.Size = new System.Drawing.Size(110, 22);
+            this.mnuFind.Text = "찾기";
+            // 
+            // mnuReplace
+            // 
+            this.mnuReplace.Name = "mnuReplace";
+            this.mnuReplace.Size = new System.Drawing.Size(110, 22);
+            this.mnuReplace.Text = "바꾸기";
             // 
             // 보기ToolStripMenuItem
             // 
@@ -185,20 +227,20 @@
             // mnuFont
             // 
             this.mnuFont.Name = "mnuFont";
-            this.mnuFont.Size = new System.Drawing.Size(180, 22);
+            this.mnuFont.Size = new System.Drawing.Size(106, 22);
             this.mnuFont.Text = "글꼴";
             // 
             // mnuAnsi
             // 
             this.mnuAnsi.Name = "mnuAnsi";
-            this.mnuAnsi.Size = new System.Drawing.Size(180, 22);
+            this.mnuAnsi.Size = new System.Drawing.Size(106, 22);
             this.mnuAnsi.Text = "ANSI";
             this.mnuAnsi.Click += new System.EventHandler(this.mnuAnsi_Click);
             // 
             // mnuUtf8
             // 
             this.mnuUtf8.Name = "mnuUtf8";
-            this.mnuUtf8.Size = new System.Drawing.Size(180, 22);
+            this.mnuUtf8.Size = new System.Drawing.Size(106, 22);
             this.mnuUtf8.Text = "UTF-8";
             this.mnuUtf8.Click += new System.EventHandler(this.mnuUtf8_Click);
             // 
@@ -215,48 +257,7 @@
             this.mnuAbout.Name = "mnuAbout";
             this.mnuAbout.Size = new System.Drawing.Size(180, 22);
             this.mnuAbout.Text = "About";
-            // 
-            // mnuNew
-            // 
-            this.mnuNew.Name = "mnuNew";
-            this.mnuNew.Size = new System.Drawing.Size(180, 22);
-            this.mnuNew.Text = "New";
-            // 
-            // mnuOpen
-            // 
-            this.mnuOpen.Name = "mnuOpen";
-            this.mnuOpen.Size = new System.Drawing.Size(180, 22);
-            this.mnuOpen.Text = "Open";
-            this.mnuOpen.Click += new System.EventHandler(this.mnuOpen_Click);
-            // 
-            // mnuSave
-            // 
-            this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(180, 22);
-            this.mnuSave.Text = "Save";
-            // 
-            // mnuFind
-            // 
-            this.mnuFind.Name = "mnuFind";
-            this.mnuFind.Size = new System.Drawing.Size(180, 22);
-            this.mnuFind.Text = "찾기";
-            // 
-            // mnuReplace
-            // 
-            this.mnuReplace.Name = "mnuReplace";
-            this.mnuReplace.Size = new System.Drawing.Size(180, 22);
-            this.mnuReplace.Text = "바꾸기";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // mnuExit
-            // 
-            this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(180, 22);
-            this.mnuExit.Text = "Exit";
+            this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
             // 
             // frmBase
             // 
@@ -290,7 +291,6 @@
         private System.Windows.Forms.ToolStripStatusLabel sbLabel3;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 파일ToolStripMenuItem;
@@ -309,6 +309,7 @@
         private System.Windows.Forms.ToolStripMenuItem 도움말ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuAbout;
         private System.Windows.Forms.ToolStripStatusLabel sbLabel2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
