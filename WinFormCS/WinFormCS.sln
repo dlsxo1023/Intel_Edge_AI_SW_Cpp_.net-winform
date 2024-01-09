@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSTest01", "CSTest01\CSTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSconApp01", "CSconApp01\CSconApp01.csproj", "{C42A27B8-C71B-4A73-8C13-04AA2DC09F0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormTest01-Base", "WinFormTest01-Base\WinFormTest01-Base.csproj", "{7A5B765F-28F6-4304-8A83-55A8D8B081ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C42A27B8-C71B-4A73-8C13-04AA2DC09F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C42A27B8-C71B-4A73-8C13-04AA2DC09F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C42A27B8-C71B-4A73-8C13-04AA2DC09F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5B765F-28F6-4304-8A83-55A8D8B081ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5B765F-28F6-4304-8A83-55A8D8B081ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5B765F-28F6-4304-8A83-55A8D8B081ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5B765F-28F6-4304-8A83-55A8D8B081ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
