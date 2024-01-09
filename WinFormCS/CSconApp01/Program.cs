@@ -34,7 +34,7 @@ namespace CSconApp01
         void func3()
         { 
             var a = 20;
-            Console.WriteLine($"var a = {a}");
+            Console.WriteLine($"ASCII code '1' = \x31 \u0031  \r\n"); // 49 = '1'
             a = 10;
             Console.WriteLine($"var a = {a}");
             Object o = a;
@@ -51,7 +51,6 @@ namespace CSconApp01
             {
                Console.WriteLine(arr[i]);     
             }
-
             char[] carr = {'안', '녕', '하', '세', '요', '?'}; 
             for (int i = 0; i < carr.Length; i++)
             {
