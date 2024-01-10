@@ -53,3 +53,5 @@
 /WinApp/.vs/WinAppCpp/v17
 /WinFormCS/.vs/WinFormCS
 /WinFormCS/WinFormTest01-Base/bin/Debug
+/WinFormCS/WinFormTest02-DBM/TestDB.mdf
+/WinFormCS/WinFormTest02-DBM/TestDB_log.ldf
