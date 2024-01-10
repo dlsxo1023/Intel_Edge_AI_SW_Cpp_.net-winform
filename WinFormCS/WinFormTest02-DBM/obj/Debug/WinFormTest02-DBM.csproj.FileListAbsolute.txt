@@ -1,0 +1,10 @@
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\bin\Debug\WinFormTest02-DBM.exe.config
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\bin\Debug\WinFormTest02-DBM.exe
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\bin\Debug\WinFormTest02-DBM.pdb
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\obj\Debug\WinFormTest02-DBM.csproj.AssemblyReference.cache
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\obj\Debug\WinFormTest02_DBM.frmDBManager.resources
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\obj\Debug\WinFormTest02_DBM.Properties.Resources.resources
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\obj\Debug\WinFormTest02-DBM.csproj.GenerateResource.cache
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\obj\Debug\WinFormTest02-DBM.csproj.CoreCompileInputs.cache
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\obj\Debug\WinFormTest02-DBM.exe
+C:\Users\EMBEDDED\source\repos\Intel\WinFormCS\WinFormTest02-DBM\obj\Debug\WinFormTest02-DBM.pdb
