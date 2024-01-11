@@ -63,7 +63,6 @@ namespace WinFormTest02_DBM
                         object[] oarr = new object[sr.FieldCount];
                         sr.GetValues(oarr);
                         result.Add(oarr);
-
                         //string str = "";
                         //for (int i = 0; i < sr.FieldCount; i++) // Column 생성
                         //{
